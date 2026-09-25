@@ -5,943 +5,655 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Rushikesh Telangade | Portfolio</title>
+    <title>TaskFlow | Smart Task Manager</title>
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 </head>
-
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
+    <!-- Background Effects -->
+    <div class="bg-blur blur-one"></div>
+    <div class="bg-blur blur-two"></div>
 
-    <header class="header">
+    <main class="app-container">
 
-        <a href="#home" class="logo">
-            Rushikesh<span>.</span>
-        </a>
+        <!-- ================= HEADER ================= -->
 
+        <header class="topbar">
 
-        <nav class="navbar" id="navbar">
+            <div class="brand">
 
-            <a href="#home" class="nav-link active">Home</a>
-            <a href="#about" class="nav-link">About</a>
-            <a href="#skills" class="nav-link">Skills</a>
-            <a href="#projects" class="nav-link">Projects</a>
-            <a href="#certifications" class="nav-link">Certifications</a>
-            <a href="#resume" class="nav-link">Resume</a>
-            <a href="#contact" class="nav-link">Contact</a>
-
-        </nav>
-
-
-        <div class="nav-buttons">
-
-            <button id="themeToggle" class="icon-btn">
-                <i class="fa-solid fa-moon"></i>
-            </button>
-
-            <button id="menuToggle" class="icon-btn menu-btn">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-
-        </div>
-
-    </header>
-
-
-
-    <!-- ================= HOME ================= -->
-
-    <section class="home section" id="home">
-
-        <div class="home-content">
-
-            <p class="small-text">
-                HELLO, I'M
-            </p>
-
-            <h1>
-                Rushikesh <span>Telangade</span>
-            </h1>
-
-            <h2>
-                <span id="typingText"></span>
-            </h2>
-
-            <p class="hero-description">
-                Computer Science Engineering student passionate about
-                frontend development, Python, data analytics and
-                emerging technologies.
-            </p>
-
-
-            <div class="home-buttons">
-
-                <a href="#projects" class="btn primary-btn">
-                    View My Work
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-
-                <a href="resume.pdf" download class="btn secondary-btn">
-                    Download Resume
-                    <i class="fa-solid fa-download"></i>
-                </a>
-
-            </div>
-
-
-            <div class="social-links">
-
-                <a href="https://linkedin.com/in/rushi-telangade"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    <i class="fa-brands fa-linkedin-in"></i>
-
-                </a>
-
-
-                <a href="https://github.com/rushitelangade"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    <i class="fa-brands fa-github"></i>
-
-                </a>
-
-
-                <a href="mailto:rushigtelangade@gmail.com">
-
-                    <i class="fa-solid fa-envelope"></i>
-
-                </a>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- PROFILE IMAGE -->
-
-        <div class="home-image">
-
-            <div class="image-circle">
-
-                <img src="image/profile.jpeg"
-                    alt="Rushikesh Telangade">
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ================= ABOUT ================= -->
-
-    <section class="about section" id="about">
-
-        <div class="section-heading reveal">
-
-            <p>ABOUT ME</p>
-
-            <h2>
-                Building my journey in
-                <span>Technology</span>
-            </h2>
-
-        </div>
-
-
-        <div class="about-container">
-
-            <div class="about-image reveal">
-
-                <img src="image/profile.jpeg"
-                    alt="Rushikesh Telangade">
-
-            </div>
-
-
-            <div class="about-content reveal">
-
-                <h3>
-                    Computer Science Engineering Student
-                </h3>
-
-                <p>
-                    I am a third-year Computer Science Engineering student
-                    interested in software development, frontend development,
-                    data analytics, machine learning and cybersecurity.
-                </p>
-
-                <p>
-                    I enjoy building practical projects and continuously
-                    improving my technical skills through projects,
-                    certifications and learning.
-                </p>
-
-
-                <div class="about-info">
-
-                    <div>
-                        <strong>Education</strong>
-                        <span>B.E. Computer Science Engineering</span>
-                    </div>
-
-                    <div>
-                        <strong>University</strong>
-                        <span>KBCNMU, Jalgaon</span>
-                    </div>
-
-                    <div>
-                        <strong>CGPA</strong>
-                        <span>7.87</span>
-                    </div>
-
-                    <div>
-                        <strong>Location</strong>
-                        <span>Buldhana, Maharashtra</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ================= SKILLS ================= -->
-
-    <section class="skills section" id="skills">
-
-        <div class="section-heading reveal">
-
-            <p>MY SKILLS</p>
-
-            <h2>
-                Technologies I
-                <span>Work With</span>
-            </h2>
-
-        </div>
-
-
-        <div class="skills-grid">
-
-            <div class="skill-card reveal">
-                <i class="fa-solid fa-c"></i>
-                <h3>C</h3>
-                <p>Programming</p>
-            </div>
-
-            <div class="skill-card reveal">
-                <i class="fa-brands fa-python"></i>
-                <h3>Python</h3>
-                <p>Programming & Data</p>
-            </div>
-
-            <div class="skill-card reveal">
-                <i class="fa-brands fa-html5"></i>
-                <h3>HTML</h3>
-                <p>Web Structure</p>
-            </div>
-
-            <div class="skill-card reveal">
-                <i class="fa-brands fa-css3-alt"></i>
-                <h3>CSS</h3>
-                <p>Web Styling</p>
-            </div>
-
-            <div class="skill-card reveal">
-                <i class="fa-brands fa-js"></i>
-                <h3>JavaScript</h3>
-                <p>Web Interactivity</p>
-            </div>
-
-            <div class="skill-card reveal">
-                <i class="fa-solid fa-database"></i>
-                <h3>MySQL</h3>
-                <p>Database</p>
-            </div>
-
-            <div class="skill-card reveal">
-                <i class="fa-solid fa-chart-line"></i>
-                <h3>Data Analytics</h3>
-                <p>Pandas • NumPy • Matplotlib</p>
-            </div>
-
-            <div class="skill-card reveal">
-                <i class="fa-solid fa-brain"></i>
-                <h3>Machine Learning</h3>
-                <p>Fundamentals</p>
-            </div>
-
-            <div class="skill-card reveal">
-                <i class="fa-solid fa-code-branch"></i>
-                <h3>Git & GitHub</h3>
-                <p>Version Control</p>
-            </div>
-
-            <div class="skill-card reveal">
-                <i class="fa-solid fa-network-wired"></i>
-                <h3>DSA</h3>
-                <p>Basic Concepts</p>
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ================= PROJECTS ================= -->
-
-    <section class="projects section" id="projects">
-
-        <div class="section-heading reveal">
-
-            <p>MY PROJECTS</p>
-
-            <h2>
-                Things I have
-                <span>Built</span>
-            </h2>
-
-        </div>
-
-
-
-        <!-- ===== ZOMATO FEATURED PROJECT ===== -->
-
-        <div class="featured-project reveal">
-
-            <div class="project-images">
-
-                <div class="main-project-image">
-
-                    <img src="image/zomato1.png"
-                        alt="Zomato Frontend Screenshot 1">
-
-                    <div class="image-label">
-                        Featured Project
-                    </div>
-
-                </div>
-
-
-                <div class="small-project-images">
-
-                    <div class="project-img-box">
-
-                        <img src="image/zomato2.png"
-                            alt="Zomato Frontend Screenshot 2">
-
-                    </div>
-
-
-                    <div class="project-img-box">
-
-                        <img src="image/zomato3.png"
-                            alt="Zomato Frontend Screenshot 3">
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- PROJECT INFORMATION -->
-
-            <div class="featured-project-content">
-
-                <p class="project-number">
-                    01 / FEATURED PROJECT
-                </p>
-
-
-                <h3>
-                    Zomato Frontend Page
-                </h3>
-
-
-                <p class="project-description">
-
-                    A responsive food-delivery interface inspired by
-                    the Zomato platform. The project focuses on creating
-                    a clean and modern user interface using HTML, CSS
-                    and JavaScript.
-
-                </p>
-
-
-                <div class="project-tags">
-
-                    <span>HTML</span>
-                    <span>CSS</span>
-                    <span>JavaScript</span>
-                    <span>Responsive Design</span>
-
-                </div>
-
-
-                <div class="project-buttons">
-
-                    <a href="https://github.com/rushitelangade"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn primary-btn">
-
-                        <i class="fa-brands fa-github"></i>
-                        GitHub
-
-                    </a>
-
-
-                    <a href="#"
-                        class="btn secondary-btn">
-
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        Live Demo
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- ===== OTHER PROJECTS ===== -->
-
-        <div class="project-grid">
-
-
-            <!-- ===== FAKE NEWS ===== -->
-
-            <div class="project-card reveal">
-
-                <div class="project-card-image">
-
-                    <img src="image\fakenews.png"
-                        alt="Fake News Detection Project Screenshot">
-
-                    <div class="project-overlay">
-
-                        <a href="image\fakenews.png"
-                            target="_blank"
-                            title="View Screenshot">
-
-                            <i class="fa-solid fa-expand"></i>
-
-                        </a>
-
-
-                        <a href="https://github.com/rushitelangade"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            title="GitHub">
-
-                            <i class="fa-brands fa-github"></i>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-
-                <div class="project-card-content">
-
-                    <span class="project-number">
-                        02 / MACHINE LEARNING
-                    </span>
-
-                    <h3>
-                        Fake News Detection using Machine Learning
-                    </h3>
-
-                    <p>
-                        Machine learning project for classifying
-                        news articles as real or fake.
-                    </p>
-
-
-                    <div class="mini-tags">
-
-                        <span>Python</span>
-                        <span>Machine Learning</span>
-                        <span>Data Preprocessing</span>
-
-                    </div>
-
-
-                    <div class="project-card-footer">
-
-                        <span>
-                            <i class="fa-solid fa-brain"></i>
-                            ML Project
-                        </span>
-
-                        <a href="https://github.com/rushitelangade"
-                            target="_blank"
-                            rel="noopener noreferrer">
-
-                            View GitHub
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- ===== ARDUINO ===== -->
-
-            <div class="project-card project-text-only reveal">
-
-                <div class="project-icon-large">
-
-                    <i class="fa-solid fa-car"></i>
-
-                </div>
-
-
-                <div class="project-card-content">
-
-                    <span class="project-number">
-                        03 / EMBEDDED SYSTEM
-                    </span>
-
-                    <h3>
-                        Automated Car Parking System using Arduino Uno
-                    </h3>
-
-                    <p>
-                        Automated parking system using Arduino Uno
-                        and sensors for vehicle detection and
-                        parking automation.
-                    </p>
-
-
-                    <div class="mini-tags">
-
-                        <span>Arduino Uno</span>
-                        <span>Sensors</span>
-                        <span>Embedded Programming</span>
-
-                    </div>
-
-
-                    <div class="project-card-footer">
-
-                        <span>
-                            <i class="fa-solid fa-microchip"></i>
-                            Hardware Project
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ================= CERTIFICATIONS ================= -->
-
-    <section class="certifications section" id="certifications">
-
-        <div class="section-heading reveal">
-
-            <p>CERTIFICATIONS</p>
-
-            <h2>
-                Learning &
-                <span>Achievements</span>
-            </h2>
-
-        </div>
-
-
-        <div class="cert-grid">
-
-
-            <!-- DELOITTE -->
-
-            <div class="cert-card reveal">
-
-                <div class="cert-icon">
-                    <i class="fa-solid fa-shield-halved"></i>
+                <div class="brand-icon">
+                    <i class="fa-solid fa-check-double"></i>
                 </div>
 
                 <div>
-
-                    <span>FORAGE</span>
-
-                    <h3>
-                        Deloitte Cyber Security Job Simulation
-                    </h3>
-
-                    <p>
-                        Cybersecurity incident analysis,
-                        vulnerabilities and mitigation.
-                    </p>
-
-                    <a href="certificates/Certificate_DELOITTE.pdf"
-                        target="_blank">
-
-                        View Certificate
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
-                    </a>
-
+                    <h1>Task<span>Flow</span></h1>
+                    <p>Smart productivity workspace</p>
                 </div>
 
             </div>
 
+            <div class="header-actions">
 
-
-            <!-- TATA -->
-
-            <div class="cert-card reveal">
-
-                <div class="cert-icon">
-                    <i class="fa-solid fa-chart-column"></i>
-                </div>
-
-                <div>
-
-                    <span>FORAGE</span>
-
-                    <h3>
-                        GenAI Data Analytics Job Simulation
-                    </h3>
-
-                    <p>
-                        Exploratory data analysis and
-                        predictive modelling planning.
-                    </p>
-
-                    <a href="certificates/TATA Simulation Certificate.pdf"
-                        target="_blank">
-
-                        View Certificate
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
-                    </a>
-
-                </div>
+                <button
+                    class="icon-button"
+                    id="themeBtn"
+                    title="Toggle theme"
+                >
+                    <i class="fa-solid fa-moon"></i>
+                </button>
 
             </div>
 
+        </header>
 
 
-            <!-- HACKATHON -->
+        <!-- ================= WELCOME ================= -->
 
-            <div class="cert-card reveal">
-
-                <div class="cert-icon">
-                    <i class="fa-solid fa-trophy"></i>
-                </div>
-
-                <div>
-
-                    <span>HACKATHON</span>
-
-                    <h3>
-                        Hackathon Participation
-                    </h3>
-
-                    <p>
-                        Participated in a hackathon as a team member
-                        and worked on an AI-based cybersecurity problem.
-                    </p>
-
-                    <a href="certificates\rushikesh.pdf"
-                        target="_blank">
-
-                        View Certificate
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ================= RESUME ================= -->
-
-    <section class="resume section" id="resume">
-
-        <div class="resume-box reveal">
+        <section class="welcome">
 
             <div>
-
-                <p>MY RESUME</p>
+                <p class="eyebrow">
+                    <i class="fa-solid fa-sparkles"></i>
+                    PERSONAL WORKSPACE
+                </p>
 
                 <h2>
-                    Want to know more
-                    <span>about me?</span>
+                    Stay focused.<br>
+                    <span>Get things done.</span>
                 </h2>
 
-                <p>
-                    Download my resume to explore my education,
-                    skills, projects and certifications.
+                <p class="welcome-text">
+                    Organize your tasks, track your progress,
+                    and make every day more productive.
                 </p>
-
             </div>
 
+            <div class="welcome-date">
 
-            <a href="resume.pdf"
-                download
-                class="btn primary-btn">
+                <i class="fa-regular fa-calendar"></i>
 
-                Download CV
-                <i class="fa-solid fa-download"></i>
-
-            </a>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ================= CONTACT ================= -->
-
-    <section class="contact section" id="contact">
-
-        <div class="section-heading reveal">
-
-            <p>CONTACT ME</p>
-
-            <h2>
-                Let's
-                <span>Connect</span>
-            </h2>
-
-        </div>
-
-
-        <div class="contact-container">
-
-
-            <div class="contact-info reveal">
-
-                <h3>
-                    Have a project or opportunity?
-                </h3>
-
-                <p>
-                    Feel free to connect with me through
-                    email or social platforms.
-                </p>
-
-
-                <div class="contact-item">
-
-                    <i class="fa-solid fa-envelope"></i>
-
-                    <div>
-
-                        <span>Email</span>
-
-                        <a href="mailto:rushigtelangade@gmail.com">
-                            rushigtelangade@gmail.com
-                        </a>
-
-                    </div>
-
-                </div>
-
-
-                <div class="contact-item">
-
-                    <i class="fa-brands fa-linkedin"></i>
-
-                    <div>
-
-                        <span>LinkedIn</span>
-
-                        <a href="https://linkedin.com/in/rushi-telangade"
-                            target="_blank">
-
-                            linkedin.com/in/rushi-telangade
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-
-                <div class="contact-item">
-
-                    <i class="fa-brands fa-github"></i>
-
-                    <div>
-
-                        <span>GitHub</span>
-
-                        <a href="https://github.com/rushitelangade"
-                            target="_blank">
-
-                            github.com/rushitelangade
-
-                        </a>
-
-                    </div>
-
+                <div>
+                    <small>Today</small>
+                    <strong id="currentDate">
+                        --
+                    </strong>
                 </div>
 
             </div>
 
+        </section>
 
 
-            <form id="contactForm" class="contact-form reveal">
+        <!-- ================= STATS ================= -->
 
-                <div class="input-row">
+        <section class="dashboard-grid">
 
-                    <input type="text"
-                        id="name"
-                        placeholder="Your Name">
+            <div class="stat-card total-card">
 
-                    <input type="email"
-                        id="email"
-                        placeholder="Your Email">
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+
+                    <span>ALL TASKS</span>
+
+                </div>
+
+                <strong id="totalTasks">0</strong>
+
+                <p>Total tasks created</p>
+
+            </div>
+
+
+            <div class="stat-card pending-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+
+                    <span>PENDING</span>
+
+                </div>
+
+                <strong id="pendingTasks">0</strong>
+
+                <p>Tasks waiting for you</p>
+
+            </div>
+
+
+            <div class="stat-card completed-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <span>COMPLETED</span>
+
+                </div>
+
+                <strong id="completedTasks">0</strong>
+
+                <p>Tasks completed</p>
+
+            </div>
+
+
+            <div class="progress-card">
+
+                <div class="progress-heading">
+
+                    <div>
+                        <span>PRODUCTIVITY</span>
+                        <h3>Today's Progress</h3>
+                    </div>
+
+                    <div class="progress-number">
+                        <span id="progressPercent">0%</span>
+                    </div>
+
+                </div>
+
+                <div class="circular-progress">
+
+                    <svg viewBox="0 0 120 120">
+
+                        <circle
+                            class="progress-bg"
+                            cx="60"
+                            cy="60"
+                            r="50"
+                        ></circle>
+
+                        <circle
+                            class="progress-circle"
+                            id="progressCircle"
+                            cx="60"
+                            cy="60"
+                            r="50"
+                        ></circle>
+
+                    </svg>
+
+                    <div class="circle-content">
+
+                        <strong id="circlePercent">
+                            0%
+                        </strong>
+
+                        <small>complete</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ADD TASK ================= -->
+
+        <section class="add-task-card">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">
+                        CREATE
+                    </span>
+
+                    <h3>Add a new task</h3>
+                </div>
+
+                <div class="section-icon">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+
+            </div>
+
+
+            <div class="task-form">
+
+                <div class="input-group task-name-input">
+
+                    <label>
+                        Task name
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-pen"></i>
+
+                        <input
+                            type="text"
+                            id="taskInput"
+                            placeholder="What needs to be done?"
+                            maxlength="100"
+                        >
+
+                    </div>
 
                 </div>
 
 
-                <input type="text"
-                    id="subject"
-                    placeholder="Subject">
+                <div class="input-group">
+
+                    <label>
+                        Category
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-folder"></i>
+
+                        <select id="categoryInput">
+
+                            <option value="Personal">
+                                Personal
+                            </option>
+
+                            <option value="College">
+                                College
+                            </option>
+
+                            <option value="Project">
+                                Project
+                            </option>
+
+                            <option value="Work">
+                                Work
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
 
 
-                <textarea id="message"
-                    rows="7"
-                    placeholder="Your Message"></textarea>
+                <div class="input-group">
+
+                    <label>
+                        Priority
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-bolt"></i>
+
+                        <select id="priorityInput">
+
+                            <option value="Low">
+                                Low
+                            </option>
+
+                            <option value="Medium" selected>
+                                Medium
+                            </option>
+
+                            <option value="High">
+                                High
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
 
 
-                <button type="submit"
-                    class="btn primary-btn">
+                <div class="input-group">
 
-                    Send Message
-                    <i class="fa-solid fa-paper-plane"></i>
+                    <label>
+                        Due date
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        <input
+                            type="date"
+                            id="dueDateInput"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="add-button"
+                    id="addTaskBtn"
+                >
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Task
 
                 </button>
 
+            </div>
 
-                <p id="formMessage"></p>
-
-            </form>
-
-        </div>
-
-    </section>
+        </section>
 
 
+        <!-- ================= TASK AREA ================= -->
 
-    <!-- ================= FOOTER ================= -->
+        <section class="tasks-section">
 
-    <footer>
+            <div class="tasks-header">
 
-        <div class="footer-content">
+                <div>
 
-            <h3>
-                Rushikesh<span>.</span>
-            </h3>
+                    <span class="section-label">
+                        YOUR WORKSPACE
+                    </span>
 
-            <p>
-                Computer Science Engineering Student
-            </p>
+                    <h3>My Tasks</h3>
 
+                </div>
 
-            <div class="footer-social">
-
-                <a href="https://linkedin.com/in/rushi-telangade"
-                    target="_blank">
-
-                    <i class="fa-brands fa-linkedin-in"></i>
-
-                </a>
-
-
-                <a href="https://github.com/rushitelangade"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    <i class="fa-brands fa-github"></i>
-
-                </a>
-
-
-                <a href="mailto:rushigtelangade@gmail.com">
-
-                    <i class="fa-solid fa-envelope"></i>
-
-                </a>
+                <button
+                    class="clear-button"
+                    id="clearCompletedBtn"
+                >
+                    <i class="fa-solid fa-broom"></i>
+                    Clear completed
+                </button>
 
             </div>
 
 
-            <p class="copyright">
+            <!-- Search -->
 
-                © 2026 Rushikesh Telangade.
-                All Rights Reserved.
+            <div class="toolbar">
 
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search tasks..."
+                    >
+
+                    <kbd>⌘ K</kbd>
+
+                </div>
+
+
+                <div class="filter-buttons">
+
+                    <button
+                        class="filter-btn active"
+                        data-filter="all"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="pending"
+                    >
+                        Pending
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="completed"
+                    >
+                        Completed
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Tasks -->
+
+            <div id="taskList"></div>
+
+
+            <!-- Empty -->
+
+            <div
+                class="empty-state"
+                id="emptyState"
+            >
+
+                <div class="empty-icon">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                </div>
+
+                <h3>No tasks found</h3>
+
+                <p>
+                    Add a task above and start getting things done.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer>
+
+            <p>
+                <i class="fa-solid fa-shield-halved"></i>
+                Your tasks are stored securely in your browser
             </p>
+
+            <span>
+                TaskFlow © 2026
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <!-- ================= EDIT MODAL ================= -->
+
+    <div
+        class="modal-overlay"
+        id="editModal"
+    >
+
+        <div class="modal">
+
+            <button
+                class="modal-close"
+                id="closeModal"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="modal-icon">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+
+            <span class="section-label">
+                EDIT TASK
+            </span>
+
+            <h3>Update your task</h3>
+
+            <input
+                type="hidden"
+                id="editTaskId"
+            >
+
+            <div class="modal-input">
+
+                <label>Task name</label>
+
+                <input
+                    type="text"
+                    id="editTaskTitle"
+                    maxlength="100"
+                >
+
+            </div>
+
+
+            <div class="modal-row">
+
+                <div class="modal-input">
+
+                    <label>Category</label>
+
+                    <select id="editCategory">
+
+                        <option value="Personal">
+                            Personal
+                        </option>
+
+                        <option value="College">
+                            College
+                        </option>
+
+                        <option value="Project">
+                            Project
+                        </option>
+
+                        <option value="Work">
+                            Work
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="modal-input">
+
+                    <label>Priority</label>
+
+                    <select id="editPriority">
+
+                        <option value="Low">
+                            Low
+                        </option>
+
+                        <option value="Medium">
+                            Medium
+                        </option>
+
+                        <option value="High">
+                            High
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-input">
+
+                <label>Due date</label>
+
+                <input
+                    type="date"
+                    id="editDueDate"
+                >
+
+            </div>
+
+
+            <button
+                class="save-edit-button"
+                id="saveEditBtn"
+            >
+
+                <i class="fa-solid fa-check"></i>
+
+                Save Changes
+
+            </button>
 
         </div>
 
-    </footer>
+    </div>
 
 
+    <!-- ================= DELETE MODAL ================= -->
 
-    <!-- BACK TO TOP -->
+    <div
+        class="modal-overlay"
+        id="deleteModal"
+    >
 
-    <button id="backToTop">
+        <div class="modal delete-modal">
 
-        <i class="fa-solid fa-arrow-up"></i>
+            <div class="delete-icon">
+                <i class="fa-solid fa-trash"></i>
+            </div>
 
-    </button>
+            <h3>Delete this task?</h3>
 
+            <p>
+                This action cannot be undone.
+            </p>
+
+            <div class="delete-actions">
+
+                <button
+                    class="cancel-delete"
+                    id="cancelDelete"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    class="confirm-delete"
+                    id="confirmDelete"
+                >
+                    Delete
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Toast -->
+
+    <div
+        class="toast"
+        id="toast"
+    >
+
+        <i id="toastIcon"></i>
+
+        <span id="toastMessage">
+            Done
+        </span>
+
+    </div>
 
 
     <script src="script.js"></script>

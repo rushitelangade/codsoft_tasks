@@ -1,929 +1,1382 @@
-/* =========================================================
-   RUSHIKESH TELANGADE — PREMIUM PORTFOLIO JS
-   ========================================================= */
+/* =========================================
+   TASKFLOW - PREMIUM TODO APP
+   ========================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+// =========================================
+// DOM ELEMENTS
+// =========================================
 
-    /* =====================================================
-       ELEMENTS
-       ===================================================== */
+const taskInput = document.getElementById("taskInput");
+const categoryInput = document.getElementById("categoryInput");
+const priorityInput = document.getElementById("priorityInput");
+const dueDateInput = document.getElementById("dueDateInput");
 
-    const body = document.body;
+const addTaskBtn = document.getElementById("addTaskBtn");
 
-    const header = document.querySelector(".header");
+const taskList = document.getElementById("taskList");
+const emptyState = document.getElementById("emptyState");
 
-    const navbar = document.getElementById("navbar");
+const searchInput = document.getElementById("searchInput");
 
-    const menuToggle = document.getElementById("menuToggle");
+const filterButtons =
+    document.querySelectorAll(".filter-btn");
 
-    const themeToggle = document.getElementById("themeToggle");
+const totalTasks =
+    document.getElementById("totalTasks");
 
-    const backToTop = document.getElementById("backToTop");
+const pendingTasks =
+    document.getElementById("pendingTasks");
 
-    const typingText = document.getElementById("typingText");
+const completedTasks =
+    document.getElementById("completedTasks");
 
-    const contactForm = document.getElementById("contactForm");
+const progressPercent =
+    document.getElementById("progressPercent");
 
-    const formMessage = document.getElementById("formMessage");
+const circlePercent =
+    document.getElementById("circlePercent");
 
+const progressCircle =
+    document.getElementById("progressCircle");
 
-    /* =====================================================
-       MOBILE NAVIGATION
-       ===================================================== */
+const currentDate =
+    document.getElementById("currentDate");
 
-    if (menuToggle && navbar) {
+const themeBtn =
+    document.getElementById("themeBtn");
 
-        menuToggle.addEventListener("click", () => {
 
-            navbar.classList.toggle("active");
+// =========================================
+// MODAL ELEMENTS
+// =========================================
 
-            const icon = menuToggle.querySelector("i");
+const editModal =
+    document.getElementById("editModal");
 
-            if (navbar.classList.contains("active")) {
+const closeModal =
+    document.getElementById("closeModal");
 
-                icon.classList.remove("fa-bars");
-                icon.classList.add("fa-xmark");
+const editTaskId =
+    document.getElementById("editTaskId");
 
-            } else {
+const editTaskTitle =
+    document.getElementById("editTaskTitle");
 
-                icon.classList.remove("fa-xmark");
-                icon.classList.add("fa-bars");
+const editCategory =
+    document.getElementById("editCategory");
 
-            }
+const editPriority =
+    document.getElementById("editPriority");
 
-        });
+const editDueDate =
+    document.getElementById("editDueDate");
 
+const saveEditBtn =
+    document.getElementById("saveEditBtn");
 
-        /* Close menu after clicking a navigation link */
 
-        document.querySelectorAll(".nav-link").forEach(link => {
+const deleteModal =
+    document.getElementById("deleteModal");
 
-            link.addEventListener("click", () => {
+const cancelDelete =
+    document.getElementById("cancelDelete");
 
-                navbar.classList.remove("active");
+const confirmDelete =
+    document.getElementById("confirmDelete");
 
-                const icon = menuToggle.querySelector("i");
+const clearCompletedBtn =
+    document.getElementById("clearCompletedBtn");
 
-                icon.classList.remove("fa-xmark");
-                icon.classList.add("fa-bars");
 
-            });
+// =========================================
+// TOAST
+// =========================================
 
-        });
+const toast =
+    document.getElementById("toast");
 
-    }
+const toastIcon =
+    document.getElementById("toastIcon");
 
+const toastMessage =
+    document.getElementById("toastMessage");
 
-    /* =====================================================
-       DARK / LIGHT THEME
-       ===================================================== */
 
-    const savedTheme = localStorage.getItem("portfolio-theme");
+// =========================================
+// STORAGE
+// =========================================
 
-    if (savedTheme === "light") {
+const STORAGE_KEY =
+    "taskflow_tasks_v2";
 
-        body.classList.add("light-theme");
+const THEME_KEY =
+    "taskflow_theme_v2";
 
-    }
 
+// =========================================
+// DATA
+// =========================================
 
-    function updateThemeIcon() {
+let tasks =
+    JSON.parse(
+        localStorage.getItem(STORAGE_KEY)
+    ) || [];
 
-        if (!themeToggle) return;
+let currentFilter = "all";
 
-        const icon = themeToggle.querySelector("i");
+let taskToDelete = null;
 
-        if (body.classList.contains("light-theme")) {
 
-            icon.classList.remove("fa-moon");
-            icon.classList.add("fa-sun");
+// =========================================
+// SAVE TASKS
+// =========================================
 
-            themeToggle.setAttribute(
-                "aria-label",
-                "Switch to dark mode"
-            );
+function saveTasks() {
 
-        } else {
-
-            icon.classList.remove("fa-sun");
-            icon.classList.add("fa-moon");
-
-            themeToggle.setAttribute(
-                "aria-label",
-                "Switch to light mode"
-            );
-
-        }
-
-    }
-
-
-    updateThemeIcon();
-
-
-    if (themeToggle) {
-
-        themeToggle.addEventListener("click", () => {
-
-            body.classList.toggle("light-theme");
-
-            const currentTheme =
-                body.classList.contains("light-theme")
-                    ? "light"
-                    : "dark";
-
-            localStorage.setItem(
-                "portfolio-theme",
-                currentTheme
-            );
-
-            updateThemeIcon();
-
-        });
-
-    }
-
-
-    /* =====================================================
-       HEADER SCROLL EFFECT
-       ===================================================== */
-
-    function handleHeaderScroll() {
-
-        if (!header) return;
-
-        if (window.scrollY > 40) {
-
-            header.classList.add("scrolled");
-
-        } else {
-
-            header.classList.remove("scrolled");
-
-        }
-
-    }
-
-
-    window.addEventListener(
-        "scroll",
-        handleHeaderScroll,
-        { passive: true }
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(tasks)
     );
 
-
-    handleHeaderScroll();
-
-
-    /* =====================================================
-       TYPING EFFECT
-       ===================================================== */
-
-    if (typingText) {
-
-        const words = [
-            "Frontend Developer",
-            "Python Developer",
-            "Data Analytics Learner",
-            "Computer Science Engineering Student"
-        ];
-
-        let wordIndex = 0;
-        let charIndex = 0;
-
-        let isDeleting = false;
+}
 
 
-        function typeEffect() {
+// =========================================
+// TODAY'S DATE
+// =========================================
 
-            const currentWord = words[wordIndex];
+function showCurrentDate() {
 
-            if (isDeleting) {
+    const today = new Date();
 
-                charIndex--;
-
-            } else {
-
-                charIndex++;
-
+    currentDate.textContent =
+        today.toLocaleDateString(
+            "en-IN",
+            {
+                weekday: "short",
+                day: "numeric",
+                month: "short",
+                year: "numeric"
             }
+        );
+
+}
 
 
-            typingText.textContent =
-                currentWord.substring(0, charIndex);
+// =========================================
+// GET LOCAL DATE
+// =========================================
+
+function getLocalDate() {
+
+    const date = new Date();
+
+    const year =
+        date.getFullYear();
+
+    const month =
+        String(
+            date.getMonth() + 1
+        ).padStart(2, "0");
+
+    const day =
+        String(
+            date.getDate()
+        ).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+
+}
 
 
-            let typingSpeed = isDeleting ? 45 : 85;
+// =========================================
+// FORMAT DATE
+// =========================================
 
+function formatDate(dateString) {
 
-            if (!isDeleting && charIndex === currentWord.length) {
+    if (!dateString) {
+        return "";
+    }
 
-                typingSpeed = 1500;
+    const date =
+        new Date(
+            `${dateString}T00:00:00`
+        );
 
-                isDeleting = true;
-
-            }
-
-
-            else if (isDeleting && charIndex === 0) {
-
-                isDeleting = false;
-
-                wordIndex =
-                    (wordIndex + 1) % words.length;
-
-                typingSpeed = 400;
-
-            }
-
-
-            setTimeout(typeEffect, typingSpeed);
-
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
         }
+    );
+
+}
 
 
-        typeEffect();
+// =========================================
+// DATE STATUS
+// =========================================
 
+function getDateStatus(task) {
+
+    if (!task.dueDate) {
+        return null;
+    }
+
+    if (task.completed) {
+        return "normal";
+    }
+
+    const today =
+        getLocalDate();
+
+    if (task.dueDate < today) {
+        return "overdue";
+    }
+
+    if (task.dueDate === today) {
+        return "today";
+    }
+
+    return "normal";
+
+}
+
+
+// =========================================
+// GENERATE ID
+// =========================================
+
+function generateId() {
+
+    return Date.now() +
+        Math.random()
+            .toString(16)
+            .slice(2);
+
+}
+
+
+// =========================================
+// ADD TASK
+// =========================================
+
+function addTask() {
+
+    const title =
+        taskInput.value.trim();
+
+    if (!title) {
+
+        showToast(
+            "Please enter a task name.",
+            "error"
+        );
+
+        taskInput.focus();
+
+        return;
     }
 
 
-    /* =====================================================
-       SCROLL REVEAL
-       ===================================================== */
+    const newTask = {
 
-    const revealElements =
-        document.querySelectorAll(".reveal");
+        id: generateId(),
 
+        title: title,
 
-    if ("IntersectionObserver" in window) {
+        category:
+            categoryInput.value,
 
-        const revealObserver =
-            new IntersectionObserver(
-                (entries, observer) => {
+        priority:
+            priorityInput.value,
 
-                    entries.forEach(entry => {
+        dueDate:
+            dueDateInput.value,
 
-                        if (entry.isIntersecting) {
+        completed: false,
 
-                            entry.target.classList.add("active");
+        createdAt:
+            new Date().toISOString()
 
-                            observer.unobserve(entry.target);
-
-                        }
-
-                    });
-
-                },
-                {
-                    threshold: 0.12,
-                    rootMargin: "0px 0px -50px 0px"
-                }
-            );
+    };
 
 
-        revealElements.forEach(element => {
+    tasks.unshift(newTask);
 
-            revealObserver.observe(element);
+    saveTasks();
 
-        });
+    renderTasks();
+
+    updateStats();
+
+    clearTaskForm();
+
+    showToast(
+        "Task added successfully!",
+        "success"
+    );
+
+}
+
+
+// =========================================
+// CLEAR FORM
+// =========================================
+
+function clearTaskForm() {
+
+    taskInput.value = "";
+
+    categoryInput.value =
+        "Personal";
+
+    priorityInput.value =
+        "Medium";
+
+    dueDateInput.value = "";
+
+    taskInput.focus();
+
+}
+
+
+// =========================================
+// TOGGLE TASK
+// =========================================
+
+function toggleTask(id) {
+
+    const task =
+        tasks.find(
+            item => item.id === id
+        );
+
+    if (!task) {
+        return;
+    }
+
+    task.completed =
+        !task.completed;
+
+    saveTasks();
+
+    renderTasks();
+
+    updateStats();
+
+    if (task.completed) {
+
+        showToast(
+            "Task completed! 🎉",
+            "success"
+        );
 
     } else {
 
-        revealElements.forEach(element => {
-
-            element.classList.add("active");
-
-        });
-
-    }
-
-
-    /* =====================================================
-       ACTIVE NAVIGATION
-       ===================================================== */
-
-    const sections =
-        document.querySelectorAll("section[id]");
-
-    const navLinks =
-        document.querySelectorAll(".nav-link");
-
-
-    function updateActiveNavigation() {
-
-        const scrollPosition =
-            window.scrollY + 180;
-
-
-        sections.forEach(section => {
-
-            const sectionTop =
-                section.offsetTop;
-
-            const sectionHeight =
-                section.offsetHeight;
-
-            const sectionId =
-                section.getAttribute("id");
-
-
-            if (
-                scrollPosition >= sectionTop &&
-                scrollPosition < sectionTop + sectionHeight
-            ) {
-
-                navLinks.forEach(link => {
-
-                    link.classList.remove("active");
-
-                });
-
-
-                const activeLink =
-                    document.querySelector(
-                        `.nav-link[href="#${sectionId}"]`
-                    );
-
-
-                if (activeLink) {
-
-                    activeLink.classList.add("active");
-
-                }
-
-            }
-
-        });
+        showToast(
+            "Task moved back to pending.",
+            "success"
+        );
 
     }
 
+}
 
-    window.addEventListener(
-        "scroll",
-        updateActiveNavigation,
-        { passive: true }
+
+// =========================================
+// OPEN EDIT MODAL
+// =========================================
+
+function openEditModal(id) {
+
+    const task =
+        tasks.find(
+            item => item.id === id
+        );
+
+    if (!task) {
+        return;
+    }
+
+    editTaskId.value =
+        task.id;
+
+    editTaskTitle.value =
+        task.title;
+
+    editCategory.value =
+        task.category;
+
+    editPriority.value =
+        task.priority;
+
+    editDueDate.value =
+        task.dueDate || "";
+
+    editModal.classList.add("show");
+
+    setTimeout(() => {
+
+        editTaskTitle.focus();
+
+    }, 100);
+
+}
+
+
+// =========================================
+// CLOSE EDIT MODAL
+// =========================================
+
+function closeEditModal() {
+
+    editModal.classList.remove("show");
+
+}
+
+
+// =========================================
+// SAVE EDIT
+// =========================================
+
+function saveEditedTask() {
+
+    const id =
+        editTaskId.value;
+
+    const title =
+        editTaskTitle.value.trim();
+
+    if (!title) {
+
+        showToast(
+            "Task name cannot be empty.",
+            "error"
+        );
+
+        editTaskTitle.focus();
+
+        return;
+    }
+
+
+    const task =
+        tasks.find(
+            item =>
+                String(item.id) ===
+                String(id)
+        );
+
+    if (!task) {
+        return;
+    }
+
+
+    task.title =
+        title;
+
+    task.category =
+        editCategory.value;
+
+    task.priority =
+        editPriority.value;
+
+    task.dueDate =
+        editDueDate.value;
+
+
+    saveTasks();
+
+    renderTasks();
+
+    updateStats();
+
+    closeEditModal();
+
+    showToast(
+        "Task updated successfully!",
+        "success"
     );
 
+}
 
-    updateActiveNavigation();
+
+// =========================================
+// OPEN DELETE MODAL
+// =========================================
+
+function openDeleteModal(id) {
+
+    taskToDelete = id;
+
+    deleteModal.classList.add("show");
+
+}
 
 
-    /* =====================================================
-       BACK TO TOP
-       ===================================================== */
+// =========================================
+// CLOSE DELETE MODAL
+// =========================================
 
-    function updateBackToTop() {
+function closeDeleteModal() {
 
-        if (!backToTop) return;
+    taskToDelete = null;
 
-        if (window.scrollY > 600) {
+    deleteModal.classList.remove("show");
 
-            backToTop.classList.add("show");
+}
 
-        } else {
 
-            backToTop.classList.remove("show");
+// =========================================
+// CONFIRM DELETE
+// =========================================
+
+function deleteTask() {
+
+    if (taskToDelete === null) {
+        return;
+    }
+
+
+    tasks =
+        tasks.filter(
+            task =>
+                String(task.id) !==
+                String(taskToDelete)
+        );
+
+
+    saveTasks();
+
+    renderTasks();
+
+    updateStats();
+
+    closeDeleteModal();
+
+    showToast(
+        "Task deleted successfully.",
+        "success"
+    );
+
+}
+
+
+// =========================================
+// CLEAR COMPLETED
+// =========================================
+
+function clearCompleted() {
+
+    const completedCount =
+        tasks.filter(
+            task => task.completed
+        ).length;
+
+
+    if (completedCount === 0) {
+
+        showToast(
+            "There are no completed tasks.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+            `Delete ${completedCount} completed task(s)?`
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    tasks =
+        tasks.filter(
+            task => !task.completed
+        );
+
+
+    saveTasks();
+
+    renderTasks();
+
+    updateStats();
+
+    showToast(
+        "Completed tasks cleared.",
+        "success"
+    );
+
+}
+
+
+// =========================================
+// SEARCH + FILTER
+// =========================================
+
+function getFilteredTasks() {
+
+    const search =
+        searchInput.value
+            .trim()
+            .toLowerCase();
+
+
+    return tasks.filter(task => {
+
+        const matchesSearch =
+            task.title
+                .toLowerCase()
+                .includes(search) ||
+
+            task.category
+                .toLowerCase()
+                .includes(search) ||
+
+            task.priority
+                .toLowerCase()
+                .includes(search);
+
+
+        if (!matchesSearch) {
+            return false;
+        }
+
+
+        if (
+            currentFilter ===
+            "pending"
+        ) {
+
+            return !task.completed;
 
         }
 
-    }
+
+        if (
+            currentFilter ===
+            "completed"
+        ) {
+
+            return task.completed;
+
+        }
 
 
-    window.addEventListener(
-        "scroll",
-        updateBackToTop,
-        { passive: true }
-    );
+        return true;
+
+    });
+
+}
 
 
-    updateBackToTop();
+// =========================================
+// RENDER TASKS
+// =========================================
+
+function renderTasks() {
+
+    const filteredTasks =
+        getFilteredTasks();
 
 
-    if (backToTop) {
-
-        backToTop.addEventListener("click", () => {
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-
-        });
-
-    }
+    taskList.innerHTML = "";
 
 
-    /* =====================================================
-       MAGNETIC BUTTON EFFECT
-       ===================================================== */
+    if (
+        filteredTasks.length === 0
+    ) {
 
-    const magneticButtons =
-        document.querySelectorAll(
-            ".primary-btn, .social-links a"
-        );
+        emptyState.style.display =
+            "block";
 
-
-    if (window.matchMedia("(pointer: fine)").matches) {
-
-        magneticButtons.forEach(button => {
-
-            button.addEventListener("mousemove", event => {
-
-                const rect =
-                    button.getBoundingClientRect();
-
-                const x =
-                    event.clientX -
-                    rect.left -
-                    rect.width / 2;
-
-                const y =
-                    event.clientY -
-                    rect.top -
-                    rect.height / 2;
-
-
-                button.style.transform =
-                    `translate(${x * 0.12}px, ${y * 0.12}px)`;
-
-            });
-
-
-            button.addEventListener("mouseleave", () => {
-
-                button.style.transform = "";
-
-            });
-
-        });
+        return;
 
     }
 
 
-    /* =====================================================
-       3D CARD TILT
-       ===================================================== */
+    emptyState.style.display =
+        "none";
 
-    const tiltCards =
-        document.querySelectorAll(
-            ".skill-card, .project-card, .cert-card"
-        );
 
+    filteredTasks.forEach(
+        (task, index) => {
 
-    if (window.matchMedia("(pointer: fine)").matches) {
-
-        tiltCards.forEach(card => {
-
-            card.addEventListener("mousemove", event => {
-
-                const rect =
-                    card.getBoundingClientRect();
-
-                const x =
-                    event.clientX - rect.left;
-
-                const y =
-                    event.clientY - rect.top;
-
-
-                const centerX =
-                    rect.width / 2;
-
-                const centerY =
-                    rect.height / 2;
-
-
-                const rotateX =
-                    ((y - centerY) / centerY) * -3;
-
-                const rotateY =
-                    ((x - centerX) / centerX) * 3;
-
-
-                card.style.transform =
-                    `perspective(900px)
-                     rotateX(${rotateX}deg)
-                     rotateY(${rotateY}deg)
-                     translateY(-7px)`;
-
-            });
-
-
-            card.addEventListener("mouseleave", () => {
-
-                card.style.transform = "";
-
-            });
-
-        });
-
-    }
-
-
-    /* =====================================================
-       MOUSE FOLLOW GLOW
-       ===================================================== */
-
-    let glow = document.querySelector(".mouse-glow");
-
-
-    if (!glow) {
-
-        glow = document.createElement("div");
-
-        glow.className = "mouse-glow";
-
-        document.body.appendChild(glow);
-
-
-        const glowStyle =
-            document.createElement("style");
-
-
-        glowStyle.textContent = `
-
-            .mouse-glow {
-
-                position: fixed;
-
-                width: 220px;
-                height: 220px;
-
-                border-radius: 50%;
-
-                pointer-events: none;
-
-                z-index: -1;
-
-                background:
-                    radial-gradient(
-                        circle,
-                        rgba(109,93,252,.10),
-                        transparent 70%
-                    );
-
-                transform:
-                    translate(-50%, -50%);
-
-                opacity: 0;
-
-                transition:
-                    opacity .3s ease;
-
-            }
-
-            @media (pointer: coarse) {
-
-                .mouse-glow {
-                    display: none;
-                }
-
-            }
-
-        `;
-
-
-        document.head.appendChild(glowStyle);
-
-    }
-
-
-    if (window.matchMedia("(pointer: fine)").matches) {
-
-        window.addEventListener("mousemove", event => {
-
-            glow.style.left =
-                `${event.clientX}px`;
-
-            glow.style.top =
-                `${event.clientY}px`;
-
-            glow.style.opacity = "1";
-
-        });
-
-    }
-
-
-    /* =====================================================
-       PROJECT IMAGE PARALLAX
-       ===================================================== */
-
-    const projectImages =
-        document.querySelectorAll(
-            ".project-card-image img, .main-project-image img"
-        );
-
-
-    if (window.matchMedia("(pointer: fine)").matches) {
-
-        projectImages.forEach(image => {
-
-            image.addEventListener("mousemove", event => {
-
-                const rect =
-                    image.getBoundingClientRect();
-
-                const x =
-                    ((event.clientX - rect.left) /
-                        rect.width - .5) * 8;
-
-                const y =
-                    ((event.clientY - rect.top) /
-                        rect.height - .5) * 8;
-
-
-                image.style.transform =
-                    `scale(1.06)
-                     translate(${x}px, ${y}px)`;
-
-            });
-
-
-            image.addEventListener("mouseleave", () => {
-
-                image.style.transform = "";
-
-            });
-
-        });
-
-    }
-
-
-    /* =====================================================
-       CONTACT FORM VALIDATION
-       ===================================================== */
-
-    if (contactForm) {
-
-        contactForm.addEventListener(
-            "submit",
-            event => {
-
-                event.preventDefault();
-
-
-                const name =
-                    document.getElementById("name");
-
-                const email =
-                    document.getElementById("email");
-
-                const subject =
-                    document.getElementById("subject");
-
-                const message =
-                    document.getElementById("message");
-
-
-                const nameValue =
-                    name.value.trim();
-
-                const emailValue =
-                    email.value.trim();
-
-                const subjectValue =
-                    subject.value.trim();
-
-                const messageValue =
-                    message.value.trim();
-
-
-                const emailPattern =
-                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-                if (!nameValue) {
-
-                    showFormMessage(
-                        "Please enter your name.",
-                        "error"
-                    );
-
-                    name.focus();
-
-                    return;
-
-                }
-
-
-                if (!emailPattern.test(emailValue)) {
-
-                    showFormMessage(
-                        "Please enter a valid email address.",
-                        "error"
-                    );
-
-                    email.focus();
-
-                    return;
-
-                }
-
-
-                if (!subjectValue) {
-
-                    showFormMessage(
-                        "Please enter a subject.",
-                        "error"
-                    );
-
-                    subject.focus();
-
-                    return;
-
-                }
-
-
-                if (messageValue.length < 10) {
-
-                    showFormMessage(
-                        "Message should contain at least 10 characters.",
-                        "error"
-                    );
-
-                    message.focus();
-
-                    return;
-
-                }
-
-
-                showFormMessage(
-                    "Message validated successfully!",
-                    "success"
+            const card =
+                document.createElement(
+                    "div"
                 );
 
 
-                contactForm.reset();
+            card.className =
+                "task-card";
+
+
+            if (task.completed) {
+
+                card.classList.add(
+                    "completed"
+                );
+
+            }
+
+
+            const priorityClass =
+                `priority-${task.priority.toLowerCase()}`;
+
+
+            const dateStatus =
+                getDateStatus(task);
+
+
+            let dateBadge = "";
+
+
+            if (task.dueDate) {
+
+                let dateText =
+                    formatDate(
+                        task.dueDate
+                    );
+
+                let dateClass = "";
+
+
+                if (
+                    dateStatus ===
+                    "overdue"
+                ) {
+
+                    dateText =
+                        `Overdue · ${dateText}`;
+
+                    dateClass =
+                        "overdue";
+
+                }
+
+
+                if (
+                    dateStatus ===
+                    "today"
+                ) {
+
+                    dateText =
+                        `Today · ${dateText}`;
+
+                    dateClass =
+                        "today-date";
+
+                }
+
+
+                dateBadge = `
+
+                    <span class="badge ${dateClass}">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        ${dateText}
+
+                    </span>
+
+                `;
+
+            }
+
+
+            card.innerHTML = `
+
+                <button
+                    class="task-check"
+                    title="${
+                        task.completed
+                            ? "Mark as pending"
+                            : "Mark as completed"
+                    }"
+                ></button>
+
+
+                <div class="task-info">
+
+                    <div class="task-title">
+                        ${escapeHTML(task.title)}
+                    </div>
+
+
+                    <div class="task-meta">
+
+                        <span class="badge">
+
+                            <i class="fa-solid fa-folder"></i>
+
+                            ${escapeHTML(
+                                task.category
+                            )}
+
+                        </span>
+
+
+                        <span
+                            class="badge ${priorityClass}"
+                        >
+
+                            <i class="fa-solid fa-bolt"></i>
+
+                            ${task.priority}
+
+                        </span>
+
+
+                        ${dateBadge}
+
+                    </div>
+
+                </div>
+
+
+                <div class="task-actions">
+
+                    <button
+                        class="action-btn edit-btn"
+                        title="Edit task"
+                    >
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+
+
+                    <button
+                        class="action-btn delete-btn"
+                        title="Delete task"
+                    >
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+
+                </div>
+
+            `;
+
+
+            const checkButton =
+                card.querySelector(
+                    ".task-check"
+                );
+
+
+            checkButton.addEventListener(
+                "click",
+                () => {
+
+                    toggleTask(task.id);
+
+                }
+            );
+
+
+            const editButton =
+                card.querySelector(
+                    ".edit-btn"
+                );
+
+
+            editButton.addEventListener(
+                "click",
+                () => {
+
+                    openEditModal(
+                        task.id
+                    );
+
+                }
+            );
+
+
+            const deleteButton =
+                card.querySelector(
+                    ".delete-btn"
+                );
+
+
+            deleteButton.addEventListener(
+                "click",
+                () => {
+
+                    openDeleteModal(
+                        task.id
+                    );
+
+                }
+            );
+
+
+            card.style.animationDelay =
+                `${index * 0.035}s`;
+
+
+            taskList.appendChild(card);
+
+        }
+    );
+
+}
+
+
+// =========================================
+// UPDATE STATISTICS
+// =========================================
+
+function updateStats() {
+
+    const total =
+        tasks.length;
+
+
+    const completed =
+        tasks.filter(
+            task => task.completed
+        ).length;
+
+
+    const pending =
+        total - completed;
+
+
+    const percentage =
+        total === 0
+            ? 0
+            : Math.round(
+                (completed / total) * 100
+            );
+
+
+    totalTasks.textContent =
+        total;
+
+    pendingTasks.textContent =
+        pending;
+
+    completedTasks.textContent =
+        completed;
+
+    progressPercent.textContent =
+        `${percentage}%`;
+
+    circlePercent.textContent =
+        `${percentage}%`;
+
+
+    updateProgressCircle(
+        percentage
+    );
+
+}
+
+
+// =========================================
+// CIRCULAR PROGRESS
+// =========================================
+
+function updateProgressCircle(
+    percentage
+) {
+
+    const radius = 50;
+
+    const circumference =
+        2 * Math.PI * radius;
+
+
+    const offset =
+        circumference -
+        (
+            percentage / 100
+        ) * circumference;
+
+
+    progressCircle.style.strokeDasharray =
+        circumference;
+
+
+    progressCircle.style.strokeDashoffset =
+        offset;
+
+}
+
+
+// =========================================
+// FILTER BUTTONS
+// =========================================
+
+filterButtons.forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                filterButtons.forEach(
+                    btn => {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                currentFilter =
+                    button.dataset.filter;
+
+
+                renderTasks();
 
             }
         );
 
     }
+);
 
 
-    function showFormMessage(message, type) {
+// =========================================
+// SEARCH
+// =========================================
 
-        if (!formMessage) return;
-
-        formMessage.textContent = message;
-
-        formMessage.style.color =
-            type === "success"
-                ? "var(--secondary)"
-                : "#ff6b81";
+searchInput.addEventListener(
+    "input",
+    renderTasks
+);
 
 
-        formMessage.style.opacity = "1";
+// =========================================
+// ADD TASK
+// =========================================
+
+addTaskBtn.addEventListener(
+    "click",
+    addTask
+);
 
 
-        setTimeout(() => {
+// =========================================
+// ENTER KEY
+// =========================================
 
-            formMessage.style.opacity = "0";
+taskInput.addEventListener(
+    "keydown",
+    event => {
 
-        }, 4000);
+        if (
+            event.key ===
+            "Enter"
+        ) {
+
+            addTask();
+
+        }
+
+    }
+);
+
+
+// =========================================
+// EDIT MODAL EVENTS
+// =========================================
+
+closeModal.addEventListener(
+    "click",
+    closeEditModal
+);
+
+
+saveEditBtn.addEventListener(
+    "click",
+    saveEditedTask
+);
+
+
+editModal.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target ===
+            editModal
+        ) {
+
+            closeEditModal();
+
+        }
+
+    }
+);
+
+
+// =========================================
+// DELETE MODAL EVENTS
+// =========================================
+
+cancelDelete.addEventListener(
+    "click",
+    closeDeleteModal
+);
+
+
+confirmDelete.addEventListener(
+    "click",
+    deleteTask
+);
+
+
+deleteModal.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target ===
+            deleteModal
+        ) {
+
+            closeDeleteModal();
+
+        }
+
+    }
+);
+
+
+// =========================================
+// CLEAR COMPLETED
+// =========================================
+
+clearCompletedBtn.addEventListener(
+    "click",
+    clearCompleted
+);
+
+
+// =========================================
+// THEME
+// =========================================
+
+function loadTheme() {
+
+    const savedTheme =
+        localStorage.getItem(
+            THEME_KEY
+        );
+
+
+    if (
+        savedTheme ===
+        "light"
+    ) {
+
+        document.body.classList.add(
+            "light"
+        );
+
+        themeBtn.innerHTML =
+            '<i class="fa-solid fa-sun"></i>';
+
+    } else {
+
+        themeBtn.innerHTML =
+            '<i class="fa-solid fa-moon"></i>';
+
+    }
+
+}
+
+
+themeBtn.addEventListener(
+    "click",
+    () => {
+
+        document.body.classList.toggle(
+            "light"
+        );
+
+
+        const isLight =
+            document.body.classList.contains(
+                "light"
+            );
+
+
+        localStorage.setItem(
+            THEME_KEY,
+            isLight
+                ? "light"
+                : "dark"
+        );
+
+
+        themeBtn.innerHTML =
+            isLight
+                ? '<i class="fa-solid fa-sun"></i>'
+                : '<i class="fa-solid fa-moon"></i>';
+
+    }
+);
+
+
+// =========================================
+// KEYBOARD SHORTCUT
+// =========================================
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            (event.ctrlKey ||
+             event.metaKey) &&
+            event.key.toLowerCase() === "k"
+        ) {
+
+            event.preventDefault();
+
+            searchInput.focus();
+
+        }
+
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeEditModal();
+
+            closeDeleteModal();
+
+        }
+
+    }
+);
+
+
+// =========================================
+// ESCAPE HTML
+// =========================================
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+// =========================================
+// TOAST
+// =========================================
+
+let toastTimer;
+
+
+function showToast(
+    message,
+    type = "success"
+) {
+
+    clearTimeout(toastTimer);
+
+
+    toastMessage.textContent =
+        message;
+
+
+    toast.classList.remove(
+        "success",
+        "error",
+        "show"
+    );
+
+
+    if (
+        type ===
+        "error"
+    ) {
+
+        toast.classList.add(
+            "error"
+        );
+
+        toastIcon.className =
+            "fa-solid fa-circle-exclamation";
+
+    } else {
+
+        toast.classList.add(
+            "success"
+        );
+
+        toastIcon.className =
+            "fa-solid fa-circle-check";
 
     }
 
 
-    /* =====================================================
-       CERTIFICATE LINK FEEDBACK
-       ===================================================== */
+    // Small delay allows animation
 
-    document
-        .querySelectorAll(".cert-card a")
-        .forEach(link => {
+    requestAnimationFrame(
+        () => {
 
-            link.addEventListener("click", () => {
-
-                link.style.transform =
-                    "scale(.97)";
-
-                setTimeout(() => {
-
-                    link.style.transform = "";
-
-                }, 150);
-
-            });
-
-        });
-
-
-    /* =====================================================
-       SMOOTH ANCHOR NAVIGATION
-       ===================================================== */
-
-    document
-        .querySelectorAll('a[href^="#"]')
-        .forEach(link => {
-
-            link.addEventListener("click", event => {
-
-                const targetId =
-                    link.getAttribute("href");
-
-
-                if (
-                    !targetId ||
-                    targetId === "#"
-                ) {
-                    return;
-                }
-
-
-                const target =
-                    document.querySelector(targetId);
-
-
-                if (!target) return;
-
-
-                event.preventDefault();
-
-
-                const headerOffset = 95;
-
-                const targetPosition =
-                    target.getBoundingClientRect().top +
-                    window.scrollY -
-                    headerOffset;
-
-
-                window.scrollTo({
-
-                    top: targetPosition,
-
-                    behavior: "smooth"
-
-                });
-
-            });
-
-        });
-
-
-    /* =====================================================
-       KEYBOARD ACCESSIBILITY
-       ===================================================== */
-
-    document.addEventListener("keydown", event => {
-
-        if (event.key === "Escape") {
-
-            if (navbar) {
-
-                navbar.classList.remove("active");
-
-            }
-
-
-            if (menuToggle) {
-
-                const icon =
-                    menuToggle.querySelector("i");
-
-                if (icon) {
-
-                    icon.classList.remove("fa-xmark");
-                    icon.classList.add("fa-bars");
-
-                }
-
-            }
+            toast.classList.add(
+                "show"
+            );
 
         }
-
-    });
-
-
-    /* =====================================================
-       IMAGE ERROR HANDLING
-       ===================================================== */
-
-    document
-        .querySelectorAll("img")
-        .forEach(image => {
-
-            image.addEventListener("error", () => {
-
-                image.style.opacity = "0.35";
-
-            });
-
-        });
+    );
 
 
-    /* =====================================================
-       PAGE LOAD
-       ===================================================== */
+    toastTimer =
+        setTimeout(
+            () => {
 
-    window.addEventListener("load", () => {
+                toast.classList.remove(
+                    "show"
+                );
 
-        document.body.classList.add("page-loaded");
+            },
+            2600
+        );
 
-    });
+}
 
-});
+
+// =========================================
+// INITIALIZE
+// =========================================
+
+showCurrentDate();
+
+loadTheme();
+
+renderTasks();
+
+updateStats();
+
+taskInput.focus();
