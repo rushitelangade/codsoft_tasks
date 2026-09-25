@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VibeX — Music Player</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Ambient Background -->
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <main class="app">
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    ♪
+                </div>
+
+                <div>
+                    <h1>VibeX</h1>
+                    <span>Music Player</span>
+                </div>
+
+            </div>
+
+
+            <div class="menu-title">
+                LIBRARY
+            </div>
+
+
+            <button class="menu-item active" id="allSongsBtn">
+
+                <span>⌂</span>
+                <span>All Songs</span>
+
+            </button>
+
+
+            <button class="menu-item" id="favoritesTab">
+
+                <span>♡</span>
+                <span>Favorites</span>
+
+            </button>
+
+
+            <div class="menu-title playlist-title">
+                PLAYLIST
+            </div>
+
+
+            <div class="playlist" id="playlist"></div>
+
+        </aside>
+
+
+        <!-- ================= MAIN CONTENT ================= -->
+
+        <section class="content">
+
+
+            <!-- TOP BAR -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <p class="small-label">
+                        WELCOME BACK
+                    </p>
+
+                    <h2>
+                        Your Music
+                    </h2>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <span>⌕</span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search songs or artists..."
+                    >
+
+                </div>
+
+            </header>
+
+
+            <!-- ================= PLAYER ================= -->
+
+            <section class="player-card">
+
+
+                <!-- Album -->
+
+                <div class="player-left">
+
+                    <div class="art-wrapper">
+
+                        <div class="album-glow"></div>
+
+                        <img
+                            id="albumArt"
+                            src="images/cover1.jpg"
+                            alt="Album Artwork"
+                        >
+
+                        <div class="vinyl-ring"></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Player Controls -->
+
+                <div class="player-right">
+
+
+                    <div class="now-playing-label">
+
+                        <span class="live-dot"></span>
+
+                        NOW PLAYING
+
+                    </div>
+
+
+                    <div class="song-details">
+
+                        <div>
+
+                            <h3 id="songTitle">
+                                Blinding Lights
+                            </h3>
+
+                            <p id="artistName">
+                                The Weeknd
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            class="favorite-btn"
+                            id="favoriteBtn"
+                        >
+                            ♡
+                        </button>
+
+                    </div>
+
+
+                    <!-- Equalizer -->
+
+                    <div
+                        class="equalizer"
+                        id="equalizer"
+                    >
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+
+                    <!-- Progress -->
+
+                    <div class="progress-area">
+
+                        <span id="currentTime">
+                            0:00
+                        </span>
+
+
+                        <input
+                            type="range"
+                            id="progressBar"
+                            min="0"
+                            max="100"
+                            value="0"
+                        >
+
+
+                        <span id="duration">
+                            0:00
+                        </span>
+
+                    </div>
+
+
+                    <!-- Controls -->
+
+                    <div class="controls">
+
+
+                        <button
+                            id="shuffleBtn"
+                            class="control-btn"
+                            title="Shuffle"
+                        >
+                            ⤨
+                        </button>
+
+
+                        <button
+                            id="prevBtn"
+                            class="control-btn"
+                            title="Previous"
+                        >
+                            ◀
+                        </button>
+
+
+                        <button
+                            id="playBtn"
+                            class="play-btn"
+                            title="Play"
+                        >
+                            ▶
+                        </button>
+
+
+                        <button
+                            id="nextBtn"
+                            class="control-btn"
+                            title="Next"
+                        >
+                            ▶
+                        </button>
+
+
+                        <button
+                            id="repeatBtn"
+                            class="control-btn"
+                            title="Repeat"
+                        >
+                            ↻
+                        </button>
+
+                    </div>
+
+
+                    <!-- Volume -->
+
+                    <div class="volume-area">
+
+                        <button
+                            id="muteBtn"
+                            class="volume-btn"
+                        >
+                            🔊
+                        </button>
+
+
+                        <input
+                            type="range"
+                            id="volumeBar"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value="0.8"
+                        >
+
+
+                        <span id="volumeValue">
+                            80%
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= SONG LIST ================= -->
+
+            <section class="songs-section">
+
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="small-label">
+                            YOUR COLLECTION
+                        </p>
+
+                        <h2 id="listTitle">
+                            All Songs
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        id="autoplayBtn"
+                        class="autoplay-btn active"
+                    >
+
+                        <span>●</span>
+
+                        Autoplay
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="songs-list"
+                    id="songsList"
+                ></div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <!-- Toast -->
+
+    <div
+        class="toast"
+        id="toast"
+    >
+        Added to favorites
+    </div>
+
+
+    <!-- Audio Engine -->
+
+    <audio id="audio"></audio>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
